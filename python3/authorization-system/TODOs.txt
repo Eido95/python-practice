@@ -1,15 +1,15 @@
-Authorization system for user login and register.
+http://docs.python-guide.org/en/latest/writing/structure/
 
 Support most new encryptions and credentials technologies.
 Support fast DB to store the encrypted data.
-Supprot password restoring.
-Support login history.
+Support password restoring.
+Support login history for each user.
 Support donating.
 
 Registering:
 Include a capcha to verify if the user is a robot.
-Send a confirmation email to acknowlage the user email and verify it.
+Send a confirmation email to acknowledge the user email and verify it.
 confirm password twice.
 
 Login:
-Using email, or user-name with password OR via GitHub, Google.
+Using either email, or user-name with password OR via GitHub, Google.
