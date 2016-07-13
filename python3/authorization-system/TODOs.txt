@@ -1,4 +1,14 @@
-http://docs.python-guide.org/en/latest/writing/structure/
+Understand how to copy-paste in Python native interpreter.
+Continue from server/core.py.
+
+Consider move sample.py to ./sample/ folder including __init__.py, core.py(which is sample.py) and helpers.py.
+Python provides a very straightforward packaging system, which is simply an extension of the module mechanism to a directory.
+Any directory with an __init__.py file is considered a Python package. The different modules in the package are imported in a similar manner as plain modules, but with a special behavior for the __init__.py file, which is used to gather all package-wide definitions.
+
+Consider make a mockup.
+setup.py should obviously be at the same folder as the module package.
+If your project has no development dependencies, or you prefer development environment setup via setup.py, requirements.txt may be unnecessary.
+Read http://docs.python-guide.org/en/latest/writing/structure/ before using tests.
 
 Support most new encryptions and credentials technologies.
 Support fast DB to store the encrypted data.
@@ -9,7 +19,7 @@ Support donating.
 Registering:
 Include a capcha to verify if the user is a robot.
 Send a confirmation email to acknowledge the user email and verify it.
-confirm password twice.
+Confirm password twice.
 
 Login:
 Using either email, or user-name with password OR via GitHub, Google.

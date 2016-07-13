@@ -1,0 +1,3 @@
+# Containing a list of items to be installed using pip install
+# https://pip.pypa.io/en/stable/reference/pip_install/#requirements-file-format
+# Specify the dependencies required to contribute to the project: testing, building, and generating documentation.
