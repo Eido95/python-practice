@@ -1,6 +1,3 @@
-Understand how to copy-paste in Python native interpreter.
-Continue from server/core.py.
-
 Consider move sample.py to ./sample/ folder including __init__.py, core.py(which is sample.py) and helpers.py.
 Python provides a very straightforward packaging system, which is simply an extension of the module mechanism to a directory.
 Any directory with an __init__.py file is considered a Python package. The different modules in the package are imported in a similar manner as plain modules, but with a special behavior for the __init__.py file, which is used to gather all package-wide definitions.
