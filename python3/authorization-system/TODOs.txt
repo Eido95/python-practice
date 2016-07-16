@@ -12,6 +12,7 @@ Support fast DB to store the encrypted data.
 Support password restoring.
 Support login history for each user.
 Support donating.
+Support cookies.
 
 Registering:
 Include a capcha to verify if the user is a robot.
@@ -19,4 +20,5 @@ Send a confirmation email to acknowledge the user email and verify it.
 Confirm password twice.
 
 Login:
-Using either email, or user-name with password OR via GitHub, Google.
+Using either email, or user-name with password OR via GitHub, Google etc...
+Prevent login overload.
