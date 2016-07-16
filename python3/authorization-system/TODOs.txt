@@ -6,6 +6,7 @@ Consider make a mockup.
 setup.py should obviously be at the same folder as the module package.
 If your project has no development dependencies, or you prefer development environment setup via setup.py, requirements.txt may be unnecessary.
 Read http://docs.python-guide.org/en/latest/writing/structure/ before using tests.
+Consider you to implement the front-end, using which framework or elements.
 
 Support most new encryptions and credentials technologies.
 Support fast DB to store the encrypted data.
@@ -13,6 +14,7 @@ Support password restoring.
 Support login history for each user.
 Support donating.
 Support cookies.
+Support multilanguage.
 
 Registering:
 Include a capcha to verify if the user is a robot.
@@ -22,3 +24,9 @@ Confirm password twice.
 Login:
 Using either email, or user-name with password OR via GitHub, Google etc...
 Prevent login overload.
+
+Homepage of logged in user:
+Show he's ip.
+Show a logout represented as some element.
+
+
