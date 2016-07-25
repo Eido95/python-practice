@@ -13,18 +13,21 @@
 __version__ = "0.1"
 
 import time
-from http import server
+from http import server, HTTPStatus
+from socketserver import ThreadingMixIn
+import threading
 
 HOST_NAME = "localhost"
 PORT_NUMBER = "8082" #unpreseved unofficial port
 
 class EidoHTTPRequestHandler(server.BaseHTTPRequestHandler):
     """This class is used to handle the HTTP requests that arrive at the server."""
-    def __init__(self):
-        """Called after the instance has been created (by __new__()), but before it is returned to the caller."""
-        super().__init__ # This is useful for accessing inherited methods that have been overridden in a class.
-        self.server_version = "EidoHTTP/" + __version__
-        self.protocol_version = "HTTP/1.1" #https://tools.ietf.org/html/rfc2616
+    # def __init__(self):
+    #     """Called after the instance has been created (by __new__()), but before it is returned to the caller."""
+    #     #super().__init__ # super() is useful for accessing inherited methods that have been overridden in a class.
+    server_version = "EidoHTTP/" + __version__
+    protocol_version = "HTTP/1.1" #https://tools.ietf.org/html/rfc2616
+    print("\nInitialized server!\n")
 
     # The handler will parse the request and the headers, then call a method specific to the request type. The method name is constructed from the request. For example, for the request method POST, the do_POST() method will be called with no arguments.
     def do_GET(self):
@@ -32,20 +35,54 @@ class EidoHTTPRequestHandler(server.BaseHTTPRequestHandler):
         Serve a GET request - client requests data from the server.
         The GET method means retrieve whatever information (in the form of an entity) is identified by the Request-URI (identifies the resource upon which to apply the request).
         """
-        self.send_response(200) # Status code OK - Successful class
+        self.send_response(HTTPStatus.OK) #HTTPStatus.OK # Status code OK - Successful class (https://tools.ietf.org/html/rfc2616#section-10.2.1)
+        self.send_header("Content-Type", "text/html")
+        self.end_headers()
+        self.append_message_body("Welcome to my server!","utf-8")
+        #print(self.path)
+        #print("My path is %s" (self.path))
+        # self.end_headers(); # an empty line (i.e., a line with nothing preceding the CRLF) indicating the end of the header fields, and possibly a message-body.
         # An entity corresponding to the requested resource should be sent in the response;
-        # Continue with the following tabs:
-        # https://tools.ietf.org/html/rfc2616
-        # http://www.w3schools.com/tags/ref_httpmethods.asp
-        # https://daanlenaerts.com/blog/2015/06/03/create-a-simple-http-server-with-python-3/
-        # https://www.python.org/dev/peps/pep-0008/
-        # https://docs.python.org/3.5/
-        # https://docs.python.org/3.5/tutorial/
-        # https://docs.python.org/3/library/http.server.html
-
 
     def do_POST(self):
         # client submits data to to the server to be proccessed.
+        pass
+
+    def append_message_body(self, message, encoding):
+        self.wfile.write(bytes(message, encoding))
+        pass
+
+class AsyncHTTPServer(ThreadingMixIn, server.HTTPServer):
+    """
+    This class is used to create an asynchronous HTTP server.
+    """
+    # https://docs.python.org/3.5/library/socketserver.html#asynchronous-mixins
+    # http://www.openbookproject.net/books/bpp4awd/index.html
+    daemon_threads = False;
+    pass
+
+def start_async(host_name, port_number):
+    """
+    Starts an asynchronous HTTP server daemon. use .stop() to stop it.
+    """
+    # Tuple sequence type
+    server_address = (host_name, port_number)
+    # daemon - https://en.wikipedia.org/wiki/Httpd
+    # synchronous version is server.HTTPServer(server_address, EidoHTTPRequestHandler)
+    async_daemon = AsyncHTTPServer(server_address, EidoHTTPRequestHandler)
+    # Start a thread with the server -- that thread will then start one more thread for each request
+    server_thread = threading.Thread(target=async_daemon.serve_forever, name="Thread-1-server_main")
+    # Exit the server thread when the main thread terminates
+    server_thread.daemon = True
+    server_thread.start()
+    print("Server loop running in thread:", server_thread.name)
+    #async_daemon.serve_forever(poll_interval=0.5)
+    return async_daemon
+
+def stop():
+    if server_thread is not None:
+        server_thread.shutdown()
+        server_thread.close()
 
 # class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 #     def do_head(s):
