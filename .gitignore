@@ -1,2 +1,6 @@
 *.lnk
+
 __pycache__/
+
+.imdone/
+*.bat

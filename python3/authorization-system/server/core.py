@@ -27,22 +27,27 @@ class EidoHTTPRequestHandler(server.BaseHTTPRequestHandler):
     #     #super().__init__ # super() is useful for accessing inherited methods that have been overridden in a class.
     server_version = "EidoHTTP/" + __version__
     protocol_version = "HTTP/1.1" #https://tools.ietf.org/html/rfc2616
-    print("\nInitialized server!\n")
 
     # The handler will parse the request and the headers, then call a method specific to the request type. The method name is constructed from the request. For example, for the request method POST, the do_POST() method will be called with no arguments.
     def do_GET(self):
-        """
-        Serve a GET request - client requests data from the server.
-        The GET method means retrieve whatever information (in the form of an entity) is identified by the Request-URI (identifies the resource upon which to apply the request).
-        """
-        self.send_response(HTTPStatus.OK) #HTTPStatus.OK # Status code OK - Successful class (https://tools.ietf.org/html/rfc2616#section-10.2.1)
-        self.send_header("Content-Type", "text/html")
-        self.end_headers()
-        self.append_message_body("Welcome to my server!","utf-8")
-        #print(self.path)
-        #print("My path is %s" (self.path))
-        # self.end_headers(); # an empty line (i.e., a line with nothing preceding the CRLF) indicating the end of the header fields, and possibly a message-body.
-        # An entity corresponding to the requested resource should be sent in the response;
+        try:
+            """
+            Serve a GET request - client requests data from the server.
+            The GET method means retrieve whatever information (in the form of an entity) is identified by the Request-URI (identifies the resource upon which to apply the request).
+            """
+            # TODO:0 analyze self.path (request path) which indicates the absoluteURI (abs_path) https://tools.ietf.org/html/rfc2616#section-5.1.2
+            self.send_response(HTTPStatus.OK) # Status code OK - Successful class (https://tools.ietf.org/html/rfc2616#section-10.2.1)
+            self.send_header("Content-Type", "text/html")
+            self.end_headers()
+            self.append_message_body("Welcome to my server! your path is %s" % (self.path),"utf-8")
+            #print(self.path)
+            #print("My path is %s" (self.path))
+            # self.end_headers(); # an empty line (i.e., a line with nothing preceding the CRLF) indicating the end of the header fields, and possibly a message-body.
+            # An entity corresponding to the requested resource should be sent in the response;
+        except:
+            server_thread.shutdown()
+            server_thread.close()
+            raise Exception("wtf!")
 
     def do_POST(self):
         # client submits data to to the server to be proccessed.
@@ -102,5 +107,3 @@ def stop():
 #             </head>""")
 #         s.wfile.write("<body><p>This is my paragraph</p>")
 #         s.wfile.write("<p>You accessed path: %s</p>" % (s.path))
-
-print("I'm a python server!")
