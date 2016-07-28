@@ -14,8 +14,10 @@ __version__ = "0.1"
 
 import time
 from http import server, HTTPStatus
+from urllib import parse
 from socketserver import ThreadingMixIn
 import threading
+from server import helpers
 
 HOST_NAME = "localhost"
 PORT_NUMBER = "8082" #unpreseved unofficial port
@@ -31,15 +33,29 @@ class EidoHTTPRequestHandler(server.BaseHTTPRequestHandler):
     # The handler will parse the request and the headers, then call a method specific to the request type. The method name is constructed from the request. For example, for the request method POST, the do_POST() method will be called with no arguments.
     def do_GET(self):
         try:
+            url_components = parse.urlparse(self.path) #"http"
+            # http://docs.python-guide.org/en/latest/writing/gotchas/
+            # http://www.garshol.priv.no/download/text/http-tut.html
             """
             Serve a GET request - client requests data from the server.
             The GET method means retrieve whatever information (in the form of an entity) is identified by the Request-URI (identifies the resource upon which to apply the request).
             """
-            # TODO:0 analyze self.path (request path) which indicates the absoluteURI (abs_path) https://tools.ietf.org/html/rfc2616#section-5.1.2
+            # DONE: analyze self.path (request path) which indicates the absoluteURI (abs_path) https://tools.ietf.org/html/rfc2616#section-5.1.2
+
             self.send_response(HTTPStatus.OK) # Status code OK - Successful class (https://tools.ietf.org/html/rfc2616#section-10.2.1)
             self.send_header("Content-Type", "text/html")
             self.end_headers()
-            self.append_message_body("Welcome to my server! your path is %s" % (self.path),"utf-8")
+            result = helpers.are_headers_legal(self.headers)
+            if result is None:
+                self.append_message_body(str(self.headers))
+            else:
+                self.append_message_body("Illigal value: %s" % (result), "utf-8")
+
+            # TODO: instead of sending plain text, we should send the html file as the packet payload (message body).
+            #self.append_message_body("Welcome to my server! your path is %s. \n" % (self.path),"utf-8")
+            #self.append_message_body("scheme: %s, netloc: %s, path: %s, params: %s, query: %s, fragment: %s. \n" % (url_components.scheme, url_components.netloc, url_components.path, url_components.params, url_components.query, url_components.fragment), "utf-8")
+            #self.append_message_body("This is client_address: %s. \n" % (str(self.client_address)), "utf-8")
+            #self.append_message_body("Host: %s. \n" % (str(self.headers["Host"])), "utf-8")
             #print(self.path)
             #print("My path is %s" (self.path))
             # self.end_headers(); # an empty line (i.e., a line with nothing preceding the CRLF) indicating the end of the header fields, and possibly a message-body.
@@ -53,7 +69,7 @@ class EidoHTTPRequestHandler(server.BaseHTTPRequestHandler):
         # client submits data to to the server to be proccessed.
         pass
 
-    def append_message_body(self, message, encoding):
+    def append_message_body(self, message, encoding="utf-8"):
         self.wfile.write(bytes(message, encoding))
         pass
 

@@ -2,6 +2,15 @@
 //Python provides a very straightforward packaging system, which is simply an extension of the module mechanism to a directory.
 Any directory with an __init__.py file is considered a Python package. The different modules in the package are imported in a similar manner as plain modules, but with a special behavior for the __init__.py file, which is used to gather all package-wide definitions.
 
+https://wiki.python.org/moin/WebFrameworks
+https://wiki.python.org/moin/WebBrowserProgramming
+
+* Understand the difference between web application and other web sites.
+* Understand what CGI and WSGI are.
+* (https://wiki.python.org/moin/Templating) Consider which will be your templating system - Django, pyTenjin, pystache, Mako, Jinja2, Cheetah, http://jonpy.sourceforge.net, Ophelia, Chameleon, wheezy.template
+* Or you'll need a framework, but you need to consider is it maintained and how new and up-to-date is it, such as: mod_wsgi, TurboGears, web2py, Bottle, Flask, Pyramid, Tornado
+* But first check https://github.com/makaimc/compare-python-web-frameworks
+
 Consider make a mockup.
 setup.py should obviously be at the same folder as the module package.
 If your project has no development dependencies, or you prefer development environment setup via setup.py, requirements.txt may be unnecessary.
