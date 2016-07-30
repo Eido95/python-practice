@@ -5,6 +5,31 @@ Any directory with an __init__.py file is considered a Python package. The diffe
 https://wiki.python.org/moin/WebFrameworks
 https://wiki.python.org/moin/WebBrowserProgramming
 
+* * Here, I reached a crossroads.
+    Should I use this single project as a whole solution for the authorization-system?
+    When reading the difference between web application and other websites, finally I came to a conclusion that I don't want that both my
+    front end will be implemented in Python and I should apply the SoC principle as my architectural design guideline because of its cons.
+    * Should I use REST? it seems pretty popular among other apis.
+    * Should I use Multitier (N-Tier) architectural pattern? is it the same as REST?
+    * Should I use SOAP? I think this is a protocol so... is it instead of REST? understand that!
+    * Should I user XML or JSON for data transfer between tiers?
+    * Should I create a API? I think I should..
+    http://programmers.stackexchange.com/questions/305919/methods-of-separating-front-and-back-end-with-full-stack-javascript
+    https://www.quora.com/How-does-a-frontend-code-and-a-backend-code-interact-with-each-other
+    http://www.aosabook.org/en/distsys.html
+    http://apigee.com/about/blog/technology/new-three-tier-architecture-html5-proxy-apis
+    https://developers.google.com/drive/v3/
+    https://en.wikipedia.org/wiki/Overview_of_RESTful_API_Description_Languages
+    http://www.restapitutorial.com/
+    * http://programmers.stackexchange.com/questions/234070/mvc-3-tier-architecture-in-game-what-is-the-business-layer
+    http://restfulapi.net/
+    http://ausweb.scu.edu.au/aw06/papers/refereed/wright/paper.html
+    http://www.ibm.com/developerworks/library/wa-aj-multitier/
+    https://www.quora.com/What-are-the-good-resources-to-learn-about-distributed-scalable-robust-software-architecture-infrastructure-building
+    https://realpython.com/blog/python/flask-by-example-integrating-flask-and-angularjs/
+    http://stackoverflow.com/questions/382665/what-is-meant-by-the-term-web-stack
+    http://whatis.techtarget.com/definition/Web-stack
+    http://stackoverflow.com/questions/4235815/how-to-build-a-distributed-web-application-platform
 * Understand the difference between web application and other web sites.
 * Understand what CGI and WSGI are.
 * (https://wiki.python.org/moin/Templating) Consider which will be your templating system - Django, pyTenjin, pystache, Mako, Jinja2, Cheetah, http://jonpy.sourceforge.net, Ophelia, Chameleon, wheezy.template
