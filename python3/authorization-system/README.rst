@@ -22,7 +22,7 @@ File descriptions:
 4. **Makefile** - Package integration and unit tests - incredibly useful tool for defining generic tasks for your project.
 5. **./docs** - Package reference documentation.
 6. **./tests** - Package integration and unit tests.
-7. **./site** - Server root folder which include all front-end files.
+7. **./site** - Server root folder which includes all front-end files.
 
 Important links:
 
