@@ -5,17 +5,27 @@ Any directory with an __init__.py file is considered a Python package. The diffe
 https://wiki.python.org/moin/WebFrameworks
 https://wiki.python.org/moin/WebBrowserProgramming
 
-* * Here, I reached a crossroads.
+When designing distributed systems it is said that the following (perhaps normal) assumptions should be considered false (and these are so well known that they commonly referred to as the Fallacies of Distributed Computing):
+
+- The network is reliable.
+- Latency is zero.
+- Bandwidth is infinite.
+- The network is secure.
+- Topology doesn’t change.
+- There is one administrator.
+- Transport cost is zero.
+- The network is homogeneous. [4]
+* * Here, I reached crossroads.
     Should I use this single project as a whole solution for the authorization-system?
     When reading the difference between web application and other websites, finally I came to a conclusion that I don't want that both my
-    front end will be implemented in Python and I should apply the SoC principle as my architectural design guideline because of its cons.
+    front end and back end will be implemented in Python and I should apply the SoC principle as my architectural design guideline because of its cons.
     * Should I use REST? it seems pretty popular among other apis.
     * Should I use Multitier (N-Tier) architectural pattern? is it the same as REST?
     * Should I use SOAP? I think this is a protocol so... is it instead of REST? understand that!
-    * Should I user XML or JSON for data transfer between tiers?
+    * Should I use XML or JSON for data transfer between tiers?
     * Should I create a API? I think I should..
-    http://programmers.stackexchange.com/questions/305919/methods-of-separating-front-and-back-end-with-full-stack-javascript
-    https://www.quora.com/How-does-a-frontend-code-and-a-backend-code-interact-with-each-other
+    REST +1
+
     http://www.aosabook.org/en/distsys.html
     http://apigee.com/about/blog/technology/new-three-tier-architecture-html5-proxy-apis
     https://developers.google.com/drive/v3/
@@ -27,7 +37,7 @@ https://wiki.python.org/moin/WebBrowserProgramming
     http://www.ibm.com/developerworks/library/wa-aj-multitier/
     https://www.quora.com/What-are-the-good-resources-to-learn-about-distributed-scalable-robust-software-architecture-infrastructure-building
     https://realpython.com/blog/python/flask-by-example-integrating-flask-and-angularjs/
-    http://stackoverflow.com/questions/382665/what-is-meant-by-the-term-web-stack
+    http://stackoverflow.com/questions/382665/what-is-mseant-by-the-term-web-stack
     http://whatis.techtarget.com/definition/Web-stack
     http://stackoverflow.com/questions/4235815/how-to-build-a-distributed-web-application-platform
 * Understand the difference between web application and other web sites.
@@ -38,6 +48,7 @@ https://wiki.python.org/moin/WebBrowserProgramming
 
 Consider make a mockup.
 setup.py should obviously be at the same folder as the module package.
+https://github.com/NathanZamecnik/mongoguestbook - MongoDB PyMongo driver example
 If your project has no development dependencies, or you prefer development environment setup via setup.py, requirements.txt may be unnecessary.
 Read http://docs.python-guide.org/en/latest/writing/structure/ before using tests.
 Consider you to implement the front-end, using which framework or elements.
@@ -55,6 +66,12 @@ Support multi-language.
 Support HTTPS.
 Support system maintenance logging.
 Support site icon.
+Support error handling, especially in daemons.
+Support asynchronous!
+
+Support file upload and download without limits.
+  - Consider whether to directly send file from the server to the user in end-to-end style.
+Supprot streaming?
 
 Registering:
 Include a capcha to verify if the user is a robot.

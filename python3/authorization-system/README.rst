@@ -14,6 +14,12 @@ Included features:
 - encryption.
 - to be continued.
 
+Architercture:
+
+- Asynchronous communication between entities to prevent I/O blocking.
+- Distributed system which can be distribute in pysical manner.
+- Replicated database to keep the service working when the database suddenly shuts down.
+
 File descriptions:
 
 1. **LICENSE** - Lawyering up!
